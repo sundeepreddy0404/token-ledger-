@@ -2,7 +2,9 @@
 
 A Chrome extension that passively tracks your token usage across **Claude, ChatGPT, and Gemini**, estimates the cost, and emails you a daily report — no copy-pasting, no manual logging.
 
-<img src="logo/icon-512.png" width="96" alt="Token Ledger logo">
+<p align="center">
+  <img src="logo/icon-512.png" width="240" alt="Token Ledger logo">
+</p>
 
 ## Why
 
