@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  :root {
+    --bg: #000000; --panel: #111111; --panel-2: #1a1a1a; --border: #2e2e2e;
+    --text: #FFFFFF; --text-dim: #A0A0A0; --text-faint: #5c5c5c;
+  }
+  * { box-sizing: border-box; }
+  body { width: 320px; margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+  .mono { font-family: 'SF Mono', Consolas, monospace; }
+  .wrap { padding: 16px; }
+  h1 { font-size: 14px; margin: 0 0 12px; font-weight: 600; letter-spacing: 0.2px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 10px; }
+  .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 12.5px; }
+  .row:last-child { margin-bottom: 0; }
+  .sq { width: 6px; height: 6px; border: 1px solid var(--text-dim); display: inline-block; margin-right: 8px; }
+  .total { font-size: 24px; font-weight: 600; }
+  .label { font-size: 11px; color: var(--text-faint); margin-top: 2px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+  label { display: block; font-size: 11px; color: var(--text-dim); margin: 8px 0 4px; }
+  input { width: 100%; background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 7px 8px; font-size: 12px; }
+  input:focus { outline: none; border-color: var(--text-dim); }
+  button { width: 100%; background: var(--text); color: var(--bg); border: none; border-radius: 6px; padding: 9px; font-size: 12.5px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+  button.ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
+  .status { font-size: 11px; color: var(--text-faint); margin-top: 8px; text-align: center; min-height: 14px; }
+  .toggle { font-size: 11px; color: var(--text-faint); cursor: pointer; text-align: right; margin-bottom: 4px; }
+  #settingsBox { display: none; }
+  .note { font-size: 10.5px; color: var(--text-faint); line-height: 1.5; margin-top: 8px; }
+  .subhead { font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.4px; margin: 12px 0 4px; }
+  .subhead:first-child { margin-top: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Token Ledger — today</h1>
+
+  <div class="card" id="todayCard">
+    <div class="subhead">Tokens used</div>
+    <div class="row"><div class="total mono" id="totalNum">0</div></div>
+    <div class="label" style="margin-bottom:8px;">estimated tokens today</div>
+    <div class="row"><span><span class="sq"></span>Claude</span><span class="mono" id="claudeNum">0</span></div>
+    <div class="row"><span><span class="sq"></span>ChatGPT</span><span class="mono" id="gptNum">0</span></div>
+    <div class="row"><span><span class="sq"></span>Gemini</span><span class="mono" id="geminiNum">0</span></div>
+
+    <hr class="divider">
+
+    <div class="subhead">Estimated cost</div>
+    <div class="row"><div class="total mono" id="totalCost">$0.00</div></div>
+    <div class="label" style="margin-bottom:8px;">estimated spend today</div>
+    <div class="row"><span><span class="sq"></span>Claude</span><span class="mono" id="claudeCost">$0.00</span></div>
+    <div class="row"><span><span class="sq"></span>ChatGPT</span><span class="mono" id="gptCost">$0.00</span></div>
+    <div class="row"><span><span class="sq"></span>Gemini</span><span class="mono" id="geminiCost">$0.00</span></div>
+  </div>
+
+  <div class="toggle" id="settingsToggle">Settings ▾</div>
+
+  <div class="card" id="settingsBox">
+    <div class="subhead">Email delivery</div>
+    <label>EmailJS Service ID</label>
+    <input type="text" id="serviceId" placeholder="service_xxxxxxx">
+    <label>EmailJS Template ID</label>
+    <input type="text" id="templateId" placeholder="template_xxxxxxx">
+    <label>EmailJS Public Key</label>
+    <input type="text" id="publicKey" placeholder="public key">
+    <label>Send report to</label>
+    <input type="text" id="recipientEmail" placeholder="you@email.com">
+
+    <div class="subhead">Cost rates ($ per million tokens, blended)</div>
+    <label>Claude</label>
+    <input type="text" id="rateClaude" placeholder="9.00">
+    <label>ChatGPT</label>
+    <input type="text" id="rateChatGPT" placeholder="7.00">
+    <label>Gemini</label>
+    <input type="text" id="rateGemini" placeholder="7.00">
+
+    <button id="saveBtn">Save settings</button>
+    <div class="note">Reports send automatically every night at 9 PM local time. Rates are rough blended estimates (avg of input/output pricing) — edit them to match whichever model tier you actually use.</div>
+  </div>
+
+  <button class="ghost" id="sendNowBtn">Send today's report now</button>
+  <div class="status" id="status"></div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>
