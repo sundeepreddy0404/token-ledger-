@@ -6,10 +6,6 @@
 
 A Chrome extension that passively tracks your token usage across **Claude, ChatGPT, and Gemini**, estimates the cost, and emails you a daily report — no copy-pasting, no manual logging.
 
-<p align="center">
-  <img src="logo/icon-512.png" width="240" alt="Token Ledger logo">
-</p>
-
 ## Why
 
 If you use multiple AI chat tools day to day, there's no single place to see how much you're actually using across all of them. Token Ledger sits quietly in the background of your browser and builds that picture for you automatically.
